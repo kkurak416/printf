@@ -5,44 +5,47 @@
 #                                                     +:+ +:+         +:+      #
 #    By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/29 15:35:52 by kkurowsk          #+#    #+#              #
-#    Updated: 2025/01/08 19:50:29 by kkurowsk         ###   ########.fr        #
+#    Created: 2025/01/09 14:55:51 by kkurowsk          #+#    #+#              #
+#    Updated: 2025/01/09 14:56:55 by kkurowsk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+HEADER  = ft_printf.h
 
-NAME = libftprintf.a
-LIBFTNAME = libft.a
-CC = cc
-CFLAGS = -Wall -Werror -Wextra -I../libft
-LIBFTDIR = ../libft
-SRCS = 	ft_printf.c \
-		print_pointer.c \
-		print_unsigned.c \
-		print_string.c \
-		print_int.c \
-		print_char.c \
-		print_hex.c \
+NAME    = libftprintf.a
 
-OBJS = $(SRCS:.c=.o)
+SRC     = ft_printf.c print_char.c print_string.c print_pointer.c print_int.c print_hex.c print_uint.c
 
-all: $(NAME)
+OBJS    = $(SRC:.c=.o)
 
-makelibft:
-	@make -C $(LIBFTDIR)
-	@cp $(LIBFTDIR)/$(LIBFTNAME) .
-	@mv $(LIBFTNAME) $(NAME)
-%.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
-$(NAME): makelibft $(OBJS)
-	@ar -r $(NAME) $(OBJS)
 
-clean:
-	@rm -f $(OBJS)
-	@cd $(LIBFTDIR) && make clean
-	
+
+CC      = cc
+CFLAGS  = -Wall -Werror -Wextra -I$(LIB_PATH)
+LIB_PATH = ../libft
+LIBFT   = $(LIB_PATH)/libft.a
+
+all: $(LIBFT) $(NAME)
+
+$(NAME): $(OBJS)
+	cp $(LIBFT) $(NAME)
+	ar -rcs $(NAME) $(OBJS)
+
+$(LIBFT):
+	make -C $(LIB_PATH) all
+
+%.o: %.c $(HEADER)
+	$(CC) -c $(CFLAGS) -I./ $< -o $@
 
 fclean: clean
-	@rm -f $(NAME)
-	@cd $(LIBFTDIR) && make fclean
-	
+	make -C $(LIB_PATH) fclean
+	rm -rf $(NAME)
+
+clean:
+	rm -f $(OBJS)
+	make -C $(LIB_PATH) clean
+
 re: fclean all
+
+.PHONY: all clean fclean re
+
+

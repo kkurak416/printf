@@ -6,11 +6,12 @@
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 19:32:40 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/08 15:01:41 by kkurowsk         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:36:11 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+#include "libft.h"
 
 int	print_int(int n)
 {

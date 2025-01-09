@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-char	print_string(char c)
+int	print_string(char *s)
 {
 	unsigned int	i;
 

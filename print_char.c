@@ -9,8 +9,8 @@
 /*   Updated: 2024/12/30 19:45:36 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "printf.h"
+#include "libft.h"
 
 int	print_char(char c)
 {

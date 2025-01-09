@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   print_unit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 16:29:48 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/08 19:29:18 by kkurowsk         ###   ########.fr       */
+/*   Created: 2025/01/08 16:43:12 by kkurowsk          #+#    #+#             */
+/*   Updated: 2025/01/08 19:34:27 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "ft_printf.h"
+#include "libft.h"
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+static void	calculate(unsigned int nb)
+{
+	if (nb > 9)
+		print_uint(nb / 10);
+	if (nb <= 9)
+	{
+		ft_putchar_fd(nb + 48, 1);
+		return ;
+	}
+	ft_putchar_fd((nb % 10) + 48, 1);
+}
 
-# include "../libft/libft.h"
-# include <stdarg.h>
+int	print_uint(unsigned int nb)
+{
+	unsigned int	i;
 
-int		ft_printf(const char *insert, ...);
-int		print_pointer(unsigned long value, int asci);
-int		print_uint(unsigned int nb);
-int		print_char(char c);
-int		print_int(int n);
-int		print_hex(unsigned int value, int asci);
-int		print_string(char *s);
-#endif
+	calculate(nb);
+	i = 1;
+	while (nb > 9)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	return (i);
+}
