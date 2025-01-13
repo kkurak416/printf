@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_int.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 19:32:40 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/09 14:36:11 by kkurowsk         ###   ########.fr       */
+/*   Created: 2024/12/16 14:07:16 by kkurowsk          #+#    #+#             */
+/*   Updated: 2024/12/16 14:07:50 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "printf.h"
 #include "libft.h"
 
-int	print_int(int n)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int				nb;
-	unsigned int	i;
+	int		len1;
+	int		len2;
+	int		i;
+	char	*ret;
 
-	nb = n;
-	i = 1;
-	if (n < 0 && n != -2147483648)
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	ret = malloc(len1 + len2 + 1);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (i < len1)
 	{
-		nb = -n;
+		ret[i] = s1[i];
 		i++;
 	}
-	while (nb > 9)
+	while (i < len1 + len2)
 	{
-		nb = nb / 10;
+		ret[i] = s2[i - len1];
 		i++;
 	}
-	ft_putnbr_fd(n, 1);
-	if (n == -2147483648)
-		return (11);
-	return (i);
+	ret[i] = '\0';
+	return (ret);
 }

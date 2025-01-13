@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unit.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 16:43:12 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/08 19:34:27 by kkurowsk         ###   ########.fr       */
+/*   Created: 2024/12/02 18:42:26 by kkurowsk          #+#    #+#             */
+/*   Updated: 2024/12/29 14:56:30 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "libft.h"
 
-static int	calculate(unsigned int nb)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	if (nb > 9)
-		print_uint(nb / 10);
-	if (nb <= 9)
-	{
-		ft_putchat_fd(nb + 48, 1);
-		return ;
-	}
-	ft_putchar_fd((nb % 10) + 48, 1);
-}
+	unsigned char		*d;
+	const unsigned char	*s;
 
-int	print_unit(unsigned int nb)
-{
-	unsigned int	i;
-
-	calculate(nb);
-	i = 1;
-	while (nb > 9)
+	d = dest;
+	s = src;
+	if (!d && !s)
+		return (NULL);
+	while (n--)
 	{
-		nb = nb / 10;
-		i++;
+		*d = *s;
+		d++;
+		s++;
 	}
-	return (i);
+	return (dest);
 }

@@ -47,7 +47,7 @@ int	ft_printf(const char *insert, ...)
 		if (*insert == '%')
 		{
 			insert++;
-			if (ft_strchr("cspdiuxX%", *insert))
+			if (ft_strchr("cspdiuxX", *insert))
 				i += ft_opcje(insert, args);
 			else if (*insert == '%')
 				i += print_char('%');

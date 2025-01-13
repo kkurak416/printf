@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 16:29:48 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/11 12:31:33 by kkurowsk         ###   ########.fr       */
+/*   Created: 2024/12/21 14:20:26 by kkurowsk          #+#    #+#             */
+/*   Updated: 2024/12/21 14:27:21 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include "libft.h"
-# include <stdarg.h>
+void	ft_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list	*current;
+	t_list	*tmp;
 
-int		ft_printf(const char *insert, ...);
-int		print_pointer(unsigned long value, int asci);
-int		print_uint(unsigned int nb);
-int		print_char(char c);
-int		print_int(int n);
-int		print_hex(unsigned int value, int asci);
-int		print_string(char *s);
-#endif
+	if (!lst || !del)
+		return ;
+	current = *lst;
+	while (current != NULL)
+	{
+		tmp = current;
+		current = current->next;
+		del(tmp->content);
+		free(tmp);
+	}
+	*lst = NULL;
+}

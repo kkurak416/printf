@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_int.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 19:32:40 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/09 14:36:11 by kkurowsk         ###   ########.fr       */
+/*   Created: 2024/12/21 14:38:20 by kkurowsk          #+#    #+#             */
+/*   Updated: 2024/12/21 14:46:40 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
 #include "libft.h"
 
-int	print_int(int n)
-{
-	int				nb;
-	unsigned int	i;
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
-	nb = n;
-	i = 1;
-	if (n < 0 && n != -2147483648)
+{
+	t_list	*new_list;
+	t_list	*new_node;
+
+	if (!lst)
+		return (NULL);
+	new_list = NULL;
+	while (lst)
 	{
-		nb = -n;
-		i++;
+		if (f)
+			new_node = ft_lstnew(f(lst->content));
+		else
+			new_node = ft_lstnew(lst->content);
+		if (!new_node)
+		{
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, new_node);
+		lst = lst->next;
 	}
-	while (nb > 9)
-	{
-		nb = nb / 10;
-		i++;
-	}
-	ft_putnbr_fd(n, 1);
-	if (n == -2147483648)
-		return (11);
-	return (i);
+	return (new_list);
 }

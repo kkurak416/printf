@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 16:29:48 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/11 12:31:33 by kkurowsk         ###   ########.fr       */
+/*   Created: 2024/12/02 17:31:42 by kkurowsk          #+#    #+#             */
+/*   Updated: 2024/12/02 17:32:31 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+void	ft_bzero(void *s, size_t n)
+{
+	char	*str;
 
-# include "libft.h"
-# include <stdarg.h>
-
-int		ft_printf(const char *insert, ...);
-int		print_pointer(unsigned long value, int asci);
-int		print_uint(unsigned int nb);
-int		print_char(char c);
-int		print_int(int n);
-int		print_hex(unsigned int value, int asci);
-int		print_string(char *s);
-#endif
+	str = (char *)s;
+	while (n > 0)
+	{
+		str[n - 1] = 0;
+		n--;
+	}
+}

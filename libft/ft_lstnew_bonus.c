@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 16:29:48 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/11 12:31:33 by kkurowsk         ###   ########.fr       */
+/*   Created: 2024/12/21 13:02:18 by kkurowsk          #+#    #+#             */
+/*   Updated: 2024/12/29 14:51:23 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*node;
 
-# include "libft.h"
-# include <stdarg.h>
-
-int		ft_printf(const char *insert, ...);
-int		print_pointer(unsigned long value, int asci);
-int		print_uint(unsigned int nb);
-int		print_char(char c);
-int		print_int(int n);
-int		print_hex(unsigned int value, int asci);
-int		print_string(char *s);
-#endif
+	node = malloc(sizeof(t_list));
+	if (NULL == node)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	return (node);
+}

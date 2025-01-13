@@ -21,7 +21,7 @@ OBJS    = $(SRC:.c=.o)
 
 CC      = cc
 CFLAGS  = -Wall -Werror -Wextra -I$(LIB_PATH)
-LIB_PATH = ../libft
+LIB_PATH = libft
 LIBFT   = $(LIB_PATH)/libft.a
 
 all: $(LIBFT) $(NAME)

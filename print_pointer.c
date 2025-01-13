@@ -6,7 +6,7 @@
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:01:15 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/09 12:34:03 by kkurowsk         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:33:06 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -29,7 +29,11 @@ static char	*create_str(unsigned long value, int *strlen)
 	return (str);
 }
 
-
+static int	print_nill(void)
+{
+	print_string ("(nil)");
+	return (5);
+}
 
 int	print_pointer(unsigned long value, int asci)
 {
@@ -38,11 +42,12 @@ int	print_pointer(unsigned long value, int asci)
 	int				i;
 	int				*iptr;
 
+	if (value == 0)
+		return (print_nill());
 	iptr = &i;
 	printout = create_str(value, iptr);
 	if (!printout)
 		return (0);
-	
 	tempo = value;
 	while (tempo != 0 && i-- >= 0)
 	{

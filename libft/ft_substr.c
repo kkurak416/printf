@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_int.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkurowsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 19:32:40 by kkurowsk          #+#    #+#             */
-/*   Updated: 2025/01/09 14:36:11 by kkurowsk         ###   ########.fr       */
+/*   Created: 2024/12/16 10:58:47 by kkurowsk          #+#    #+#             */
+/*   Updated: 2024/12/16 10:59:17 by kkurowsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "printf.h"
 #include "libft.h"
 
-int	print_int(int n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int				nb;
-	unsigned int	i;
+	size_t	i;
+	char	*sub;
 
-	nb = n;
-	i = 1;
-	if (n < 0 && n != -2147483648)
+	if (s == NULL)
+		return (NULL);
+	if (start >= (unsigned int)ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	sub = malloc(len + 1);
+	if (!sub)
+		return (NULL);
+	i = 0;
+	while (i < len && s[start + i] != '\0')
 	{
-		nb = -n;
+		sub[i] = s[start + i];
 		i++;
 	}
-	while (nb > 9)
-	{
-		nb = nb / 10;
-		i++;
-	}
-	ft_putnbr_fd(n, 1);
-	if (n == -2147483648)
-		return (11);
-	return (i);
+	sub[i] = '\0';
+	return (sub);
 }
